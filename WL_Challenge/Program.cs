@@ -1,7 +1,10 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WL_Challenge
@@ -10,12 +13,26 @@ namespace WL_Challenge
     {
         static void Main(string[] args)
         {
-            // The code provided will print ‘Hello World’ to the console.
-            // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            IWebDriver driver = new ChromeDriver();
 
-            // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+            driver.Navigate().GoToUrl("http://testapp.galenframework.com/");
+
+            driver.FindElement(By.XPath("//button[@class='btn btn-lg btn-primary button-login']")).Click();
+
+            driver.FindElement(By.Name("login.username")).SendKeys("testuser@example.com");
+
+            driver.FindElement(By.Name("login.password")).SendKeys("test123");
+
+            Thread.Sleep(6000);
+
+            driver.FindElement(By.XPath("//button[@type='button']")).Click();
+
+            Thread.Sleep(6000);
+
+
+
+            driver.Quit();
+
         }
     }
 }
